@@ -7,6 +7,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { DashBoard } from '../screens/DashBoard';
 import { Register } from '../screens/Register'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Resume } from '../screens/Resume';
 
 const { Navigator, Screen} = createBottomTabNavigator();
 
@@ -39,27 +41,27 @@ export function AppRoutes() {
             />
           )
         }}
-      />
+        />
       <Screen
         name="Cadastrar"
         component={Register}
         options={{
           tabBarIcon: (({size, color}) => 
-            <MaterialIcons 
-              name='attach-money'
+          <MaterialIcons 
+          name='attach-money'
               size={size}
               color={color}
+              />
+              )
+            }}
             />
-          )
-        }}
-      />
       <Screen
         name="Resumo"
-        component={Register}
+        component={Resume}
         options={{
           tabBarIcon: (({size, color}) => 
-            <MaterialIcons 
-              name='pie-chart'
+          <MaterialIcons 
+          name='pie-chart'
               size={size}
               color={color}
             />

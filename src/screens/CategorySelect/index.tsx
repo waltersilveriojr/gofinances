@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Button } from "../../components/Form/Button";
 import { categories } from "../../Utils/categories";
 

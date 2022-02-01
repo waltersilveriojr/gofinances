@@ -31,7 +31,6 @@ export const Container = styled.View<ContainerProps>`
 
 `;
 
-
 export const Button = styled(RectButton)`
   
   flex-direction: row;
