@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+
+import { useForm } from "react-hook-form";
+import { useNavigation } from '@react-navigation/native'
+import { useAuth } from "../../hooks/auth";
+
 import { 
   Keyboard, 
   Modal, 
@@ -9,11 +14,10 @@ import {
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { useForm } from "react-hook-form";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 import uuid from 'react-native-uuid';
-import { useNavigation } from '@react-navigation/native'
+
 
 import  { InputForm }  from "../../components/Form/InputForm";
 import  { Button }  from "../../components/Form/Button";
@@ -29,7 +33,6 @@ import { Container,
             Fields,
             TransactionsTypes
 } from "./styles"
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 
 interface FormData {
@@ -48,6 +51,8 @@ const schema = Yup.object().shape({
 
 export function Register() {
 
+  const { user } = useAuth();
+  
   const [transactionType,setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [category, setCategory] = useState({
@@ -55,6 +60,7 @@ export function Register() {
     name: 'Categoria',
   });
   
+
   function handleTransactionTypeSelect(type: 'positive' | 'negative') {
     setTransactionType(type);
   }
@@ -97,7 +103,7 @@ export function Register() {
     }
 
     try {
-      const dataKey ='@gofinaces:transactions';
+      const dataKey =`@gofinaces:transactions_user:${user.id}`;
 
       const data = await AsyncStorage.getItem(dataKey);
       const currentData = data ? JSON.parse(data) : [];
